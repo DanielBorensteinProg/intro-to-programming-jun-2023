@@ -1,6 +1,6 @@
-﻿using Alba;
+﻿
+using Alba;
 using BusinessClockApi.Models;
-using Microsoft.VisualStudio.TestPlatform.TestHost;
 using System.Net;
 
 namespace BusinessClock.IntegrationTests.Status;
@@ -12,15 +12,11 @@ public class GettingTheStatus
     {
         var host = await AlbaHost.For<Program>();
 
-
-
-        var response = await host.Scenario(api =>
+       var response = await host.Scenario(api =>
         {
             api.Get.Url("/status");
             api.StatusCodeShouldBeOk();
         });
-
-
 
         Assert.NotNull(response); // did we get something back?
         GetStatusResponse? responseMessage = response.ReadAsJson<GetStatusResponse>();
@@ -34,15 +30,11 @@ public class GettingTheStatus
     {
         var host = await AlbaHost.For<Program>();
 
-
-
         var response = await host.Scenario(api =>
         {
             api.Get.Url("/status");
             api.StatusCodeShouldBeOk();
         });
-
-
 
         Assert.NotNull(response); // did we get something back?
         GetStatusResponse? responseMessage = response.ReadAsJson<GetStatusResponse>();
