@@ -1,0 +1,25 @@
+﻿namespace Banking.Domain
+{
+    public class Account
+    {
+        private decimal _balance = 5000M;
+        public void Deposit(decimal amountToDeposit)
+        {
+            _balance += amountToDeposit;
+        }
+
+        public void Withdrawal(decimal amountToWithdrawal)
+        {
+            if (amountToWithdrawal > _balance)
+            {
+                return;
+            }
+            _balance -= amountToWithdrawal;
+        }
+
+        public decimal GetBalance()
+        {
+            return _balance;
+        }
+    }
+}
