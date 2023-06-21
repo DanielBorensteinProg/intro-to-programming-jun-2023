@@ -10,7 +10,7 @@ public class ValidatingPlayersForABowlingGame
         // Given
         var game = new BowlingGame();
 
-
+      
         game.AddPlayer("Jim", 120);
         game.AddPlayer("Sue", 200);
 
