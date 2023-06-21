@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\ITUStudent\dev\intro-to-programming-jun-2023\instructor\GamesSolution\Games\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\ITUStudent\dev\intro-to-programming-jun-2023\instructor\GamesSolution\Games\.editorconfig" />
+  </ItemGroup>
+
+</Project>
