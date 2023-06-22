@@ -12,7 +12,7 @@
         {
             if (amountToWithdrawal > _balance)
             {
-                return;
+                throw new OverdraftException();
             }
             _balance -= amountToWithdrawal;
         }
