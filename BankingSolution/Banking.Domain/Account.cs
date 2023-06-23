@@ -1,25 +1,37 @@
-﻿namespace Banking.Domain
+﻿namespace Banking.Domain;
+
+public class Account
 {
-    public class Account
+    private decimal _balance = 5000; // Fields class level variable
+    private ICanCalculateBonuses _bonusCalculator;
+
+    public Account(ICanCalculateBonuses bonusCalculator)
     {
-        private decimal _balance = 5000M;
-        public void Deposit(decimal amountToDeposit)
-        {
-            _balance += amountToDeposit;
-        }
+        _bonusCalculator = bonusCalculator;
+    }
 
-        public void Withdrawal(decimal amountToWithdrawal)
-        {
-            if (amountToWithdrawal > _balance)
-            {
-                throw new OverdraftException();
-            }
-            _balance -= amountToWithdrawal;
-        }
+    public void Deposit(decimal amountToDeposit)
+    {
+        
+        
+        decimal bonus = _bonusCalculator.CalculateBonusForDepositOn(_balance, amountToDeposit);
 
-        public decimal GetBalance()
+        _balance += amountToDeposit + bonus;
+    }
+
+   
+
+    public decimal GetBalance()
+    {
+        return _balance; // "Sliming"
+    }
+
+    public void Withdraw(decimal amountToWithdraw)
+    {
+        if(amountToWithdraw > _balance)
         {
-            return _balance;
+            throw new OverdraftException();
         }
+       _balance -= amountToWithdraw;
     }
 }

@@ -1,48 +1,34 @@
 ﻿
+
+using Banking.UnitTests.TestDoubles;
+
 namespace Banking.UnitTests.BankAccount;
 
 public class MakingWithdrawals
 {
-    [Fact]
-    public static void MakingAWithdrawalDecreasesTheBalance()
+    [Theory]
+    [InlineData(100)]
+    [InlineData(125.23)]
+
+    public void MakingAWithdrawlDecreasesTheBalance(decimal amountToWithdraw)
     {
-        // Given 
-        // If I have an account and I want to deposit 100
-        Account account = new Account();
-        decimal openingBalance = account.GetBalance(); // Query
-        decimal amountToWithdrawal = 100M;
+        var account = new Account(new DummyBonusCalculator());
+        var openingBalance = account.GetBalance();
+       
 
+        account.Withdraw(amountToWithdraw);
 
-
-        // When - I do the deposit
-        account.Withdrawal(amountToWithdrawal); // "Command"
-
-
-
-        // Then - I can verify it worked if the new balance is 100 more than the balance
-        //        was before.
-        Assert.Equal(openingBalance - amountToWithdrawal, account.GetBalance());
+        Assert.Equal(openingBalance - amountToWithdraw, account.GetBalance());
     }
 
     [Fact]
     public void CanTakeFullBalance()
     {
-        // Given 
-        // If I have an account and I want to deposit 100
-        Account account = new Account();
-        decimal openingBalance = account.GetBalance(); // Query
-        decimal amountToWithdrawal = openingBalance;
+        var account = new Account(new DummyBonusCalculator());
+        var openingBalance = account.GetBalance();
 
+        account.Withdraw(openingBalance);
 
-
-        // When - I do the deposit
-        account.Withdrawal(amountToWithdrawal); // "Command"
-
-
-
-        // Then - I can verify it worked if the new balance is 100 more than the balance
-        //        was before.
-        Assert.Equal(openingBalance - amountToWithdrawal, account.GetBalance());
-
+        Assert.Equal(0, account.GetBalance());
     }
 }
